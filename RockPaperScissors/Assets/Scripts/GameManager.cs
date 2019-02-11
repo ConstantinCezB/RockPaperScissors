@@ -1,60 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     enum elements { Rock = 1, Paper = 2, Scissor = 3 }
-    private int playerSelection = -1;
-    private int computerSelection = -1;
-    private bool playerTurn = true;
-    public GameObject winnerText;
+    private bool playerTurn;
+    private int playerSelection, computerSelection, playerScore, computerScore, roundCount;
     public Sprite rockImage, paperImage, scissorImage;
-    public GameObject playerSelectionImage, computerSelectionImage;
+    public GameObject winnerText, playerSelectionImage, computerSelectionImage, roundCountText, computerScoreText, playerScoreText;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        playerSelection = -1;
+        computerSelection = -1;
+        playerTurn = true;
+        playerScore = 0;
+        computerScore = 0;
+        roundCount = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerTurn && playerSelection == -1)
-        {
-            return;
-        }
-        else
-        {
-            setComputerSelection();
-            selectImage(playerSelectionImage, playerSelection);
-            selectImage(computerSelectionImage, computerSelection);
-            checkWinner();
-            playerTurn = true;
-            playerSelection = -1;
-        }
+        if (roundCount == 0) chackWinnerGameAndEnd();
+        if (playerTurn && playerSelection == -1) return;
+        setComputerSelection();
+        selectImage(playerSelectionImage, playerSelection);
+        selectImage(computerSelectionImage, computerSelection);
+        checkWinnerRound();
+        updateScore();
+        roundCounter();
+        playerTurn = true;
+        playerSelection = -1;
     }
 
-    public void setPlayerSelection(int playerSelection)
+    private void setPlayerSelection(int playerSelection)
     {
         this.playerSelection = playerSelection;
         this.playerTurn = false;
     }
 
-    public void returnMainMenu ()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void setComputerSelection ()
+    private void setComputerSelection ()
     {
         this.computerSelection = Random.Range(1, 4);
     }
 
-    public void checkWinner ()
+    private void checkWinnerRound ()
     {
         Debug.Log("player: " + playerSelection + "\tcomputer: " + computerSelection);
         //draw
@@ -68,12 +61,31 @@ public class GameManager : MonoBehaviour
               || (playerSelection == (int)elements.Scissor && computerSelection == (int)elements.Paper))
         {
             winnerText.GetComponent<Text>().text = "Player WINS";
+            playerScore++;
         }
         //computer wins
         else
         {
             winnerText.GetComponent<Text>().text = "Computer WINS";
+            computerScore++;
         }
+    }
+
+    private void chackWinnerGameAndEnd()
+    {
+        if (playerScore == computerScore)
+        {
+            ApplicationModel.winner = 0;
+        }
+        else if (playerScore > computerScore)
+        {
+            ApplicationModel.winner = 1;
+        }
+        else
+        {
+            ApplicationModel.winner = 2;
+        }
+        SceneManager.LoadScene("EndGameMenu");
     }
 
     private void selectImage(GameObject imageToChange, int selection)
@@ -90,5 +102,27 @@ public class GameManager : MonoBehaviour
         {
             imageToChange.GetComponent<Image>().sprite = scissorImage;
         }
+    }
+
+    private void roundCounter()
+    {
+        roundCount--;
+        roundCountText.GetComponent<Text>().text = roundCount.ToString();
+        
+    }
+
+    private void updateScore()
+    {
+        computerScoreText.GetComponent<Text>().text = "Computer: " + computerScore;
+        playerScoreText.GetComponent<Text>().text = "Your score: " + playerScore;
+    }
+
+    public void endGameButton()
+    {
+        chackWinnerGameAndEnd();
+    }
+    public void returnMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
