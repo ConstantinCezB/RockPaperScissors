@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4766243751394425671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5074426047170929590}
+  - component: {fileID: 4572245817957996911}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5074426047170929590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4766243751394425671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4572245817957996911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4766243751394425671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb2b24e3a884104fb6c7d47cb5fac48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockImage: {fileID: 21300000, guid: 9a94c7cd018acd243a3e18630601ad37, type: 3}
+  paperImage: {fileID: 21300000, guid: 113d2824eba75544482c8918f1aba465, type: 3}
+  scissorImage: {fileID: 21300000, guid: 8d9d467ace0ef4247aee11826ef4d582, type: 3}
+  winnerTextG: {fileID: 0}
+  playerSelectionImageG: {fileID: 0}
+  computerSelectionImageG: {fileID: 0}
+  roundCountTextG: {fileID: 0}
+  computerScoreTextG: {fileID: 0}
+  playerScoreTextG: {fileID: 0}
